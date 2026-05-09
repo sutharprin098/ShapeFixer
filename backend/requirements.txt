@@ -1,0 +1,9 @@
+fastapi==0.110.0
+uvicorn==0.27.1
+python-multipart==0.0.9
+geopandas==0.14.3
+shapely==2.0.3
+fiona==1.9.5
+pydantic==2.5.2
+pydantic-settings==2.1.0
+pyshp==2.3.1
