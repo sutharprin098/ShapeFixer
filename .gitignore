@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+.next/
+out/
+build/
+dist/
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+
+# IDE / System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# App Specific
+backend/temp_storage/
+backend/uploads/
+*.log
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# GIS Temp Files
+*.shp.xml
+*.shx.xml
