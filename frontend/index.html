@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="3;url=https://vercel.com/">
+    <title>ShapeFixer | App Gateway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #0f172a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+        }
+        .container {
+            max-width: 500px;
+            padding: 2rem;
+        }
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 5px solid #e2e8f0;
+            border-bottom-color: #2563eb;
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+            margin-bottom: 2rem;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        h1 { font-weight: 800; margin-bottom: 1rem; }
+        p { color: #64748b; line-height: 1.6; }
+        .btn {
+            display: inline-block;
+            margin-top: 2rem;
+            padding: 0.75rem 1.5rem;
+            background: #2563eb;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="loader"></div>
+        <h1>Deploying to Vercel...</h1>
+        <p>GitHub Pages cannot host Next.js applications directly. To fix this "Full", please deploy your project to Vercel using the button below.</p>
+        <a href="https://vercel.com/new/clone?repository-url=https://github.com/sutharprin098/ShapeFixer&root-directory=frontend" class="btn">Deploy to Vercel</a>
+    </div>
+</body>
+</html>

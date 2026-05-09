@@ -1,9 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  devIndicators: {
-    appIsrStatus: false,
-  },
+  /* Vercel handles deployments automatically */
 };
 
 export default nextConfig;
