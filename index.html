@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ShapeFixer | Professional GIS Engine Portal</title>
+    <title>ShapeFixer | Advanced GIS Geometry Repair</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Plus+Jakarta+Sans:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #f8fafc;
-            --accent-blue: #2563eb;
-            --accent-purple: #7c3aed;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --glass-bg: rgba(255, 255, 255, 0.7);
-            --glass-border: rgba(226, 232, 240, 0.8);
+            --primary: #2563eb;
+            --secondary: #7c3aed;
+            --bg: #f8fafc;
+            --text: #0f172a;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --glass: rgba(255, 255, 255, 0.7);
+            --border: rgba(226, 232, 240, 0.8);
         }
 
         * {
@@ -23,194 +24,31 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
+            background-color: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Animated Background */
-        .bg-glow {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-        }
-
-        .glow-1 {
-            position: absolute;
-            top: -5%;
-            left: -5%;
-            width: 50%;
-            height: 50%;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(60px);
-            animation: move 20s infinite alternate;
-        }
-
-        .glow-2 {
-            position: absolute;
-            bottom: -5%;
-            right: -5%;
-            width: 50%;
-            height: 50%;
-            background: radial-gradient(circle, rgba(124, 58, 237, 0.1) 0%, transparent 70%);
-            border-radius: 50%;
-            filter: blur(60px);
-            animation: move 25s infinite alternate-reverse;
-        }
-
-        @keyframes move {
-            from { transform: translate(0, 0); }
-            to { transform: translate(50px, 50px); }
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 100%;
-            padding: 2rem;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .logo-container {
-            margin-bottom: 3rem;
-            animation: fadeInDown 1s ease-out;
-        }
-
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 4rem;
-            font-weight: 800;
-            letter-spacing: -2px;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .logo span {
-            color: var(--accent-blue);
-        }
-
-        .tagline {
-            color: var(--text-secondary);
-            font-size: 1.25rem;
-            max-width: 600px;
-            margin: 0 auto;
             line-height: 1.6;
-            font-weight: 400;
         }
 
-        .portal-grid {
-            display: flex;
-            justify-content: center;
-            margin-top: 4rem;
+        /* Animations */
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
         }
 
-        .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 32px;
-            padding: 4rem 3rem;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            text-decoration: none;
-            color: inherit;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            max-width: 450px;
-            width: 100%;
-            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
-            animation: fadeInUp 1s ease-out both;
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            70% { box-shadow: 0 0 0 20px rgba(37, 99, 235, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
         }
 
-        .card:hover {
-            transform: translateY(-12px) scale(1.02);
-            border-color: var(--accent-blue);
-            background: white;
-            box-shadow: 0 40px 80px -20px rgba(37, 99, 235, 0.15);
-        }
-
-        .card-icon {
-            width: 80px;
-            height: 80px;
-            background: rgba(37, 99, 235, 0.08);
-            border-radius: 24px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 2rem;
-            color: var(--accent-blue);
-            transition: all 0.4s ease;
-        }
-
-        .card:hover .card-icon {
-            transform: scale(1.1) rotate(8deg);
-            background: var(--accent-blue);
-            color: white;
-        }
-
-        .card-title {
-            font-size: 1.75rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .card-desc {
-            color: var(--text-secondary);
-            font-size: 1rem;
-            line-height: 1.6;
-            margin-bottom: 2.5rem;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            background: var(--text-primary);
-            color: white;
-            border-radius: 16px;
-            font-weight: 700;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .card:hover .btn {
-            background: var(--accent-blue);
-            transform: scale(1.05);
-            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
-        }
-
-        .footer {
-            margin-top: 6rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            animation: fadeIn 2s ease;
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-40px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -219,48 +57,337 @@
             to { opacity: 1; }
         }
 
-        @media (max-width: 640px) {
-            .logo { font-size: 3rem; }
-            .tagline { font-size: 1.1rem; }
-            .card { padding: 3rem 2rem; }
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Background Elements */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+        }
+
+        .blob-2 {
+            bottom: -10%;
+            right: -10%;
+            width: 600px;
+            height: 600px;
+            background: var(--secondary);
+        }
+
+        /* Header */
+        header {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            letter-spacing: -1px;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--primary);
+        }
+
+        nav a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: slideInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            line-height: 0.9;
+            margin-bottom: 2rem;
+            letter-spacing: -4px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto 3rem;
+            font-weight: 400;
+        }
+
+        .cta-btn {
+            padding: 1.25rem 3rem;
+            background: var(--text);
+            color: white;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            animation: pulse-glow 2s infinite;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05) translateY(-5px);
+            background: var(--primary);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Floating Element Illustration */
+        .floating-art {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border: 2px solid rgba(37, 99, 235, 0.1);
+            animation: float 10s infinite ease-in-out;
+        }
+
+        .shape-1 { top: 20%; left: 10%; width: 100px; height: 100px; border-radius: 20px; }
+        .shape-2 { bottom: 20%; right: 15%; width: 150px; height: 150px; border-radius: 50%; border-color: rgba(124, 58, 237, 0.1); animation-delay: 2s; }
+        .shape-3 { top: 15%; right: 10%; width: 80px; height: 80px; transform: rotate(45deg); animation-delay: 4s; }
+
+        /* Features Section */
+        .features {
+            padding: 10rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 6rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            padding: 3.5rem;
+            transition: all 0.5s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            background: white;
+            border-color: var(--primary);
+            box-shadow: 0 40px 80px rgba(15, 23, 42, 0.05);
+        }
+
+        .icon-box {
+            width: 70px;
+            height: 70px;
+            background: rgba(37, 99, 235, 0.1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            font-size: 2rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 2rem;
+            text-align: center;
+            background: white;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: var(--text-light);
+            margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 4rem; }
+            .feature-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-glow">
-        <div class="glow-1"></div>
-        <div class="glow-2"></div>
+    <div class="bg-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
     </div>
 
-    <div class="container">
-        <div class="logo-container">
-            <h1 class="logo">Shape<span>Fixer</span></h1>
-            <p class="tagline">The world's most intuitive GIS utility engine. Repair, validate, and export spatial data with surgical precision.</p>
-        </div>
+    <div class="floating-art">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
 
-        <div class="portal-grid">
-            <!-- Frontend Card Only -->
-            <a href="./frontend/" class="card">
-                <div class="card-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 3H6a3 3 0 0 0-3 3v12a3 3 0 0 0 3 3h12a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3z"/><path d="M9 3v18"/><path d="M3 9h18"/></svg>
-                </div>
-                <h2 class="card-title">Interactive Dashboard</h2>
-                <p class="card-desc">Access the full web application to upload Shapefiles, preview repairs, and manage GIS attributes in real-time.</p>
-                <div class="btn">Launch Platform &rarr;</div>
+    <header>
+        <a href="#" class="logo">Shape<span>Fixer.</span></a>
+        <nav>
+            <a href="#features">Features</a>
+            <a href="#how-it-works">Technology</a>
+            <a href="./frontend/" class="cta-small">Launch App</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Surgical <span>GIS</span> Repair.</h1>
+            <p>The next-generation geometry engine that automatically heals broken Shapefiles, fixes topology errors, and recovers lost spatial data in seconds.</p>
+            <a href="./frontend/" class="cta-btn">
+                Launch Dashboard
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
             </a>
         </div>
+    </section>
 
-        <div class="footer">
-            &copy; 2026 ShapeFixer GIS Systems. All rights reserved.
+    <section id="features" class="features">
+        <div class="section-header reveal">
+            <h2>Built for GIS Experts.</h2>
+            <p>A powerful suite of tools to ensure your spatial data is production-ready.</p>
         </div>
-    </div>
+        <div class="feature-grid">
+            <div class="feature-card reveal">
+                <div class="icon-box">⚡</div>
+                <h3>Instant Validation</h3>
+                <p>Run over 50+ geometric integrity checks in milliseconds. No more invalid self-intersections or sliver polygons.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-box">🛠️</div>
+                <h3>Auto-Healing</h3>
+                <p>Our AI-driven engine reconstructs missing .shx and .dbf headers, ensuring your Shapefiles open in any software.</p>
+            </div>
+            <div class="feature-card reveal">
+                <div class="icon-box">🌐</div>
+                <h3>Universal Export</h3>
+                <p>Convert and repair into multiple formats including GeoJSON, GeoPackage, and ZIP Shapefile instantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-logo">Shape<span>Fixer.</span></div>
+        <p class="footer-text">The world's most trusted spatial data engineering platform.</p>
+        <p>&copy; 2026 ShapeFixer Systems. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Check if we are running in a typical local dev environment
-        // and adjust links if necessary (optional)
-        if (window.location.port === '3000' || window.location.pathname.includes('frontend')) {
-            // Already in frontend
+        // Scroll Reveal Script
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
         }
+
+        window.addEventListener("scroll", reveal);
+        // Initial call
+        reveal();
     </script>
 </body>
 </html>
