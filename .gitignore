@@ -29,3 +29,8 @@ backend/uploads/
 # GIS Temp Files
 *.shp.xml
 *.shx.xml
+temp_check_pune/
+.next/
+out/
+dist/
+build/
