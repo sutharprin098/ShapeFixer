@@ -2,7 +2,20 @@
 
 **The Professional GIS Data Repair & Engineering Engine.**
 
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sutharprin098/ShapeFixer&root-directory=frontend)
+
 ShapeFixer is a high-performance web utility built for GIS professionals who need a reliable, automated way to clean spatial data. No heavy software, no complex installs—just upload, fix, and download.
+
+---
+
+## 🚀 Quick Deployment (Vercel)
+
+To deploy this project to **Vercel**:
+
+1. Click the button above or go to [Vercel Dashboard](https://vercel.com/new).
+2. Import your **ShapeFixer** repository.
+3. **IMPORTANT:** In the "Project Settings", set the **Root Directory** to `frontend`.
+4. Click **Deploy**.
 
 ---
 
