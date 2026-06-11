@@ -13,16 +13,20 @@ interface UploadZoneProps {
 export default function UploadZone({ onUploadComplete, isLoading }: UploadZoneProps) {
   const [error, setError] = useState<string | null>(null);
 
-  const onDrop = useCallback(async (acceptedFiles: File[]) => {
+  const onDrop = useCallback(async (acceptedFiles: File[], fileRejections: any[]) => {
     setError(null);
-    if (acceptedFiles.length === 0) return;
+    
+    // Merge accepted and rejected files because OS might send valid files with unknown MIME types (e.g. application/octet-stream for .zip)
+    const allFiles = [...acceptedFiles, ...(fileRejections || []).map(r => r.file)];
+    
+    if (allFiles.length === 0) return;
 
     const allowedExts = ['.zip', '.geojson', '.json', '.gpkg', '.kml'];
-    const validFiles = acceptedFiles.filter(file => 
-      allowedExts.some(ext => file.name.toLowerCase().endsWith(ext))
+    const validFiles = allFiles.filter(file => 
+      file?.name && allowedExts.some(ext => file.name.toLowerCase().endsWith(ext))
     );
 
-    if (validFiles.length < acceptedFiles.length) {
+    if (validFiles.length < allFiles.length) {
       setError(`Some files were skipped. Only .zip, .geojson, .gpkg, .kml are supported.`);
     }
 
@@ -37,7 +41,7 @@ export default function UploadZone({ onUploadComplete, isLoading }: UploadZonePr
         formData.append('file', file);
         
         const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/api/upload`,
+          `${process.env.NEXT_PUBLIC_API_URL || ''}/api/upload`,
           { method: 'POST', body: formData }
         );
 
@@ -62,9 +66,14 @@ export default function UploadZone({ onUploadComplete, isLoading }: UploadZonePr
     accept: {
       'application/zip': ['.zip'],
       'application/x-zip-compressed': ['.zip'],
+      'application/x-zip': ['.zip'],
+      'application/octet-stream': ['.zip', '.gpkg', '.kml'],
       'application/geo+json': ['.geojson', '.json'],
+      'application/json': ['.geojson', '.json'],
       'application/geopackage+sqlite3': ['.gpkg'],
       'application/vnd.google-earth.kml+xml': ['.kml'],
+      'application/xml': ['.kml'],
+      'text/xml': ['.kml'],
     },
   });
 

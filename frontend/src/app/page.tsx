@@ -36,7 +36,7 @@ const MapPreview = dynamic(() => import('@/components/MapPreview'), {
   ),
 });
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
 /** Bug 13 fix: safe JSON parse — never throws on non-JSON responses */
 async function safeJson(res: Response): Promise<any> {

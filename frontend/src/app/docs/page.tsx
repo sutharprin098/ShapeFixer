@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 
 export default function ApiDocs() {
   const [backendStatus, setBackendStatus] = useState('checking');
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || '';
 
   useEffect(() => {
     fetch(`${API_URL}/api/health`).then(res => setBackendStatus(res.ok ? 'connected' : 'disconnected')).catch(() => setBackendStatus('disconnected'));

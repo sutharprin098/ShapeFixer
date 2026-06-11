@@ -12,6 +12,15 @@ const nextConfig = {
   // maplibre-gl is excluded from the server bundle automatically because
   // MapPreview is imported with { ssr: false }, so no webpack externals needed.
   turbopack: {},
+
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000') + '/api/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
